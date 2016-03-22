@@ -7,5 +7,6 @@
 return array(
     'D_C' => 'Index',
     'D_A' => 'index',
+    'C_NAME'=>'Controller',
     'URL_MOD'=> 2,     //1:正常模式　2:pathinfo模式
 );

@@ -37,3 +37,10 @@ function halt($str, $display = true)
     exit;
 }
 
+function p($data)
+{
+    echo '<pre>';
+    print_r($data);
+
+}
+
