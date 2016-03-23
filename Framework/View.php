@@ -1,6 +1,6 @@
 <?php
 /**
- * 
+ *
  * @author Bruce.cheng@carbit.com.cn
  * @date 16-3-21
  */
@@ -21,7 +21,7 @@ class View
      */
     public function view($file)
     {
-        $this->view_path = ROOT. '/App/View/' . $file . '.html';
+        $this->view_path = APP_PATH . 'View/' . $file . '.html';
         unset($file);
         extract($this->value);
         include $this->view_path;

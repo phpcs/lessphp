@@ -25,4 +25,9 @@ class Controller
     {
         $this->view->assign($key, $value);
     }
+
+    public function __call($name, $args)
+    {
+        halt("方法:{$name}不存在");
+    }
 }
