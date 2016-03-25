@@ -56,13 +56,30 @@ function halt($str, $display = false)
     if ($display) {
         debug_print_backtrace();
     }
+    exit;
+}
 
-    return;
+function odd($num)
+{
+    return 1 & $num;
+}
+
+function even($num)
+{
+    return !(1 & $num);
 }
 
 function p($data)
 {
     echo '<pre>';
     print_r($data);
+}
+
+function closed()
+{
+    echo "<div style='width: 80%;height: 400px; margin:100px auto; background: #CCCCCC;border: 1px solid blue; text-align: center'>
+            <div style='padding-top: 180px'>网站正在升级中........</div>
+            </div>";
+    exit;
 }
 

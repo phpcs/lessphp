@@ -8,10 +8,12 @@ namespace Framework;
 
 class Kernel
 {
-    public $module = 'Home';
 
     public function __construct()
     {
+        $this->g = C('D_G_F');
+        $this->c = C('D_C');
+        $this->a = C('D_A');
         // 设定错误和异常处理
         register_shutdown_function('\Framework\Kernel::fatalError');
         set_error_handler('\Framework\Kernel::appError');
@@ -20,51 +22,79 @@ class Kernel
         $this->start();
     }
 
-    static public function autoLoad($classname)
-    {
-        if (stripos($classname, '\\')) {
-            $str = str_replace('\\', '/', $classname);
-        }
-        includeFile(ROOT_PATH . $str . '.php');
-    }
-
+    /**
+     * 根据处理后的request_uri获取分段参数
+     */
     public function start()
     {
-        $filter_param = array('<', '>', '"', "'", '%3C', '%3E', '%22', '%27', '%3c', '%3e');
-        $query_str = str_replace($filter_param, '', $_SERVER['REQUEST_URI']);
-        $c = C('D_C');
-        $a = C('D_A');
+        if (C('WEB_STATUS') == 0) {
+            closed();
+        }
         switch (C('URL_MOD')) {
             case 1:     //传统模式
-                preg_match('/c=([a-zA-Z]+\w+)/', $query_str, $controller);
-                preg_match('/a=([a-zA-Z]+\w+)/', $query_str, $action);
-                $c = isset($controller[1]) ? $controller[1] : C('D_C');
-                $a = isset($action[1]) ? $action[1] : C('D_A');
+                $this->tradition_uri();
                 break;
-            case 2:    //pathinfo模式
-                if ($uri = self::_parse_request_uri()) {
-                    $query_arr = explode('/', $uri);
-                    $c = $query_arr[0];
-                    if (count($query_arr) > 1) {
-                        $a = $query_arr[1];
-                        $_GET = array_slice($query_arr, 2);
-                    }
-                }
-                //var_dump($_GET);
-                break;
+            default :       //pathinfo模式
+                $this->pathinfo_url();
         }
-        $c_name = "\\App\\Controller\\Home\\" . ucfirst($c) . C('C_NAME');
+        $c_name = "\\" . APP_NAME . "\\Controller\\" . $this->g . "\\" . ucfirst($this->c) . C('D_C_NAME');
         if (class_exists($c_name)) {
-            call_user_func(array(new $c_name, $a));
+            call_user_func(array(new $c_name, $this->a));
         }
     }
 
+    public function tradition_uri()
+    {
+        $this->g = isset($_GET['g']) ? $_GET['g'] : C('D_G_F');
+        $this->c = $_GET['c'];
+        $this->a = $_GET['a'];
+    }
+
+    public function pathinfo_url()
+    {
+        if ($uri = self::_parse_request_uri()) {
+            $query_arr = explode(C('SEPARATER'), $uri);
+            if (in_array($query_arr[0], C('GROUP_LIST'))) {
+                $this->g = $query_arr[0];
+                array_shift($query_arr);
+            }
+            $_length = count($query_arr);
+            if (!empty($query_arr)&& $_length < 2) {
+                $this->c = $query_arr[0];
+            } elseif(!empty($query_arr)&& $_length >= 2) {
+                $this->c = $query_arr[0];
+                $this->a = $query_arr[1];
+                $_arr = array_slice($query_arr, 2);
+                if ($_length>2) {
+                    for ($i = 0, $j = count($_arr); $i < $j; $i++) {
+                        if (even($i)) {
+                            if (isset($_arr[$i + 1])) {
+                                $_GET[$_arr[$i]] = $_arr[$i + 1];
+                            } else {
+                                $_GET[$_arr[$i]] = '';
+                            }
+                        }
+                    }
+                }
+            }
+            unset($_GET['s']);
+        }
+    }
+
+    /**
+     * 处理request_uri
+     *
+     * @return string
+     */
     static public function _parse_request_uri()
     {
         if (!isset($_SERVER['REQUEST_URI'], $_SERVER['SCRIPT_NAME'])) {
             return '';
         }
-        $uri = parse_url('http://dummy' . $_SERVER['REQUEST_URI']);
+        $filter_param = array('<', '>', '"', "'", '%3C', '%3E', '%22', '%27', '%3c', '%3e');
+        $query_str = str_replace($filter_param, '', $_SERVER['REQUEST_URI']);
+
+        $uri = parse_url('http://dummy' . $query_str);
         $query = isset($uri['query']) ? $uri['query'] : '';
         $uri = isset($uri['path']) ? $uri['path'] : '';
 
@@ -77,7 +107,16 @@ class Kernel
         return trim($uri, '/');
     }
 
+    static public function autoLoad($classname)
+    {
+        if (stripos($classname, '\\')) {
+            $str = str_replace('\\', '/', $classname);
+        }
+        includeFile(ROOT_PATH . $str . '.php');
+    }
+
     // 致命错误捕获
+
     static public function fatalError()
     {
         if ($e = error_get_last()) {
@@ -115,9 +154,8 @@ class Kernel
      */
     static public function appException($e)
     {
-        echo 3;
+        throw new Exception('发生异常');
     }
-
 
     private function __clone()
     {

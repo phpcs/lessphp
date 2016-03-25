@@ -15,7 +15,6 @@ class ProductController extends \Framework\Controller
     }
     public function test()
     {
-        print_r($_GET);
         $this->assign('title', 1111);
         $this->view('Product/test');
     }
