@@ -24,7 +24,7 @@ class View
         $this->view_path = APP_PATH . 'View/' . $file . '.html';
         unset($file);
         extract($this->value);
-        include $this->view_path;
+        includeFile($this->view_path);
     }
 
     /**
