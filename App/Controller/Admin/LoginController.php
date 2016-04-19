@@ -10,7 +10,7 @@ class LoginController extends BaseController
 {
     public function index()
     {
-        echo '这是登录页';
+        $this->view();
     }
 
     public function test()

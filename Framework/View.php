@@ -21,10 +21,30 @@ class View
      */
     public function view($file)
     {
-        $this->view_path = APP_PATH . 'View/' . $file . '.html';
+        if (empty($file)) {
+            $file = Module_CONTROLLER.DIRECTORY_SEPARATOR.Module_ACTION;
+        }
+        $this->view_path = APP_PATH . 'View' . DIRECTORY_SEPARATOR . Module_GROUP . DIRECTORY_SEPARATOR . $file . '.html';
         unset($file);
         extract($this->value);
-        includeFile($this->view_path);
+        $content = file_get_contents($this->view_path);
+        $this->parseTemplate($content);
+    }
+
+    public function parseTemplate($content)
+    {
+        preg_match_all('#<include\s+file=\s?(\"|\')\s?(.*?)\s?(\"|\')\s+/>#', $content, $arr);
+        foreach ($arr[2] as $k => $v) {
+            $s_include = file_get_contents(APP_PATH . 'View' . DIRECTORY_SEPARATOR . Module_GROUP . DIRECTORY_SEPARATOR . 'Base' . DIRECTORY_SEPARATOR . $v);
+            $content  = str_replace($arr[0][$k], $s_include, $content);
+        }
+        $cache_file = APP_PATH. 'Cache/'.md5(Module_CONTROLLER.DIRECTORY_SEPARATOR.Module_ACTION).'.php';
+
+        $content = preg_replace('#\{\$([a-zA-Z]+)\}#', '<?php echo \$this->value[\'\\1\']; ?>', $content);
+
+        file_put_contents($cache_file, $content);
+
+        include $cache_file;
     }
 
     /**

@@ -10,8 +10,9 @@ class IndexController extends BaseController
 {
     public function index()
     {
+        $this->assign('a', '你好');
+        $this->assign('title', '测试标题');
         $this->view('Index/index');
-        $this->assign('a', 123);
     }
 
     public function test()

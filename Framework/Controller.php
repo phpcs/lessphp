@@ -16,7 +16,7 @@ class Controller
         $this->view =  new View();
     }
 
-    public function view($file)
+    public function view($file='')
     {
         $this->view->view($file);
     }
