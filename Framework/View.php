@@ -39,7 +39,6 @@ class View
             $content  = str_replace($arr[0][$k], $s_include, $content);
         }
         $cache_file = APP_PATH. 'Cache/'.md5(Module_CONTROLLER.DS.Module_ACTION).'.php';
-
         $content = preg_replace('#\{\$([a-zA-Z]+)\}#', '<?php echo \$this->value[\'\\1\']; ?>', $content);
 
         file_put_contents($cache_file, $content);
