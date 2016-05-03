@@ -13,5 +13,6 @@ return array(
     'URL_MOD' => 2,     //1:正常模式　2:pathinfo模式,
     'WEB_STATUS' => 1,    //1:正常, 0:关闭,
     'SEPARATER' => '/',
-    'GROUP_LIST' => array('Home')
+    'GROUP_LIST' => array('Home'),
+     'DEBUG' => true
 );

@@ -28,6 +28,6 @@ class Controller
 
     public function __call($name, $args)
     {
-        halt("方法:{$name}不存在");
+        halt();
     }
 }

@@ -44,16 +44,14 @@ function includeFile($file)
     if (file_exists($file)) {
         include $file;
     } else {
-        halt('文件：' . basename($file) . '不存在');
+        halt();
     }
 }
 
-function halt($str, $display = false)
+function halt()
 {
-    header("Content-Type:text/html; charset=utf-8");
-    echo "<div style='margin: 0 auto;padding:10px 10px;background-color: #00ab00;border: 1px solid #ff0000;font-size: 18px;color:#ffffff;height:50px;line-height: 30px'>";
-    echo "$str</div>";
-    if ($display) {
+    include ROOT_PATH.'/App/View/error.html';
+    if (C('DEBUG')) {
         debug_print_backtrace();
     }
     exit;

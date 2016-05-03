@@ -102,7 +102,6 @@ class Kernel
         $query_str = str_replace($filter_param, '', $_SERVER['REQUEST_URI']);
 
         $uri = parse_url('http://dummy' . $query_str);
-        $query = isset($uri['query']) ? $uri['query'] : '';
         $uri = isset($uri['path']) ? $uri['path'] : '';
 
         if (strpos($uri, $_SERVER['SCRIPT_NAME']) === 0) {
