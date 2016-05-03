@@ -1,0 +1,55 @@
+a{
+    text-decoration: none !important;
+}
+body{
+    font-size: 14px;
+    font-family: "-apple-system","Open Sans","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
+    height: 100%;
+}
+@media screen and (max-width: 1024px){
+    .left-col {
+        width: 210px;
+    }
+}
+.left-col {
+    background-color: #369abc;
+    height: 100%;
+    position: fixed;
+    width: 270px;
+}
+#header{
+    border-bottom: none;
+    height: auto;
+    line-height: 30px;
+    margin-left: 50px;
+    padding: 30px 0;
+    width: 100%;
+}
+#header h1 a {
+    float: none;
+    font-weight: 300;
+    font-size: 30px;
+    color:#ffffff;
+}
+#header img{
+    margin-top: 40px;
+    margin-left: -15px;
+}
+#nav ul{
+    margin-top: 30px;
+    padding: 0 0;
+}
+#nav ul li{
+    list-style: none;
+    line-height:38px;
+}
+#nav ul li>a{
+    color: #ffffff;
+    font-size: 16px;
+    text-decoration: none;
+}
+#nav ul li>a:hover{
+    color: #111;
+    font-size: 16px;
+    text-decoration: none;
+}
