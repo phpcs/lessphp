@@ -9,20 +9,23 @@ body{
     font-size: 14px;
     font-family: "-apple-system","Open Sans","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
     height: 100%;
+    background-color:#eee
 }
 .left-col {
     background-image: url('../../../Static/img/nav_bg.jpg');
     background-color: #369abc;
     height: 100%;
     position: fixed;
+    padding:30px 0;
     width: 250px;
 }
-@media screen and (max-device-width: 1154px) {
+@media screen and (min-device-width: 500px) {
     .left-col{
-        width: 200px;
+        width: 250px;
     }
-    #content{
-        margin-left: 265px;
+    .container{
+	padding-left:45px !important;
+	margin-left:250px !important;
     }
 }
 /**适配手机屏css*******/
@@ -74,10 +77,10 @@ body{
     }
 }
 #header{
+    text-align:center;
+    padding:0px 30px;
     border-bottom: none;
     height: auto;
-    margin-left: 50px;
-    padding: 30px 0;
     width: 100%;
 }
 #header h1 a {
@@ -88,7 +91,6 @@ body{
 }
 #header img{
     margin-top: 40px;
-    margin-left: -15px;
 }
 #nav ul{
     margin-top: 30px;
