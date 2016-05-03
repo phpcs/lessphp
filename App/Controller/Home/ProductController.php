@@ -10,12 +10,10 @@ class ProductController extends \Framework\Controller
 {
     public function index()
     {
-        $this->assign('title', 1111);
         $this->view();
     }
     public function test()
     {
-        $this->assign('title', 1111);
         $this->view();
     }
 }
