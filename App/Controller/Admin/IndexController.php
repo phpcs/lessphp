@@ -10,7 +10,8 @@ class IndexController extends BaseController
 {
     public function index()
     {
-        echo '这是后台首页';
+        $this->assign('title','后台管理');
+        $this->view();
     }
 
     public function test()

@@ -35,7 +35,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a target='_blank' href="https://git.coding.net/lampcs/Coding.net">LessPHP代码</a>
+                    <a target='_blank' href="/Admin/Index">管理员登录</a>
                 </li>
             </ul>
         </nav>

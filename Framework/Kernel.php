@@ -55,6 +55,10 @@ class Kernel
 
     public function pathinfo_url()
     {
+        if (strpos($_SERVER['REQUEST_URI'], 'static') || strpos($_SERVER['REQUEST_URI'], 'static')){
+            includeFile(ROOT_PATH.$_SERVER['REQUEST_URI']);
+            return ;
+        }
         if ($uri = self::_parse_request_uri()) {
             $query_arr = explode(C('SEPARATER'), $uri);
             if (in_array($query_arr[0], C('GROUP_LIST'))) {

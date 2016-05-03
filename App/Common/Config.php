@@ -5,5 +5,5 @@
  * @date 16-2-18
  */
 return array(
-    'GROUP_LIST' => array('Home', 'Admin')
+    'GROUP_LIST' => array('Home', 'Admin'),
 );
