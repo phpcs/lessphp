@@ -10,7 +10,7 @@ class IndexController extends BaseController
 {
     public function index()
     {
-        $this->assign('title','后台管理');
+        $this->setTitle();
         $this->view();
     }
 
