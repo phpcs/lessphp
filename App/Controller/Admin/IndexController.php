@@ -14,8 +14,12 @@ class IndexController extends BaseController
         $this->view();
     }
 
-    public function test()
+    public function panel()
     {
-        echo __FILE__;
+        $user = $_POST['user'];
+        $pass = $_POST['password'];
+        //if ($user=='admin' && $pass=='admin') {
+        	$this->view();
+        //}
     }
 }
