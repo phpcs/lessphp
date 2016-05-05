@@ -11,8 +11,7 @@ class IndexController extends BaseController
     public function index()
     {
     	$obj = new \Framework\Model();
-    	$res = $obj->query("select * from article");
-    	var_dump($res);
+        var_dump($obj);
         $this->assign('a', '你好');
         $this->view('Index/index');
     }

@@ -1,3 +1,27 @@
-<include file="header.html"  />
-11111
-<include file="footer.html"  />
+<h3>你好！</h3>
+<hr/>
+<style>
+    .row{
+        background: #ffffff;
+    }
+</style>
+<div class="row">
+    <div class="col-xs-12">
+        <P>服务器IP: <?PHP  echo $_SERVER['SERVER_ADDR']; ?></P>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <P>系统信息: <?PHP ECHO PHP_OS; ?></P>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <P>环境信息: <?PHP ECHO PHP_VERSION;?></P>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <P>当前登录时间: <?PHP ECHO date('Y-m-d H:i',$_SERVER['REQUEST_TIME']);?></P>
+    </div>
+</div>

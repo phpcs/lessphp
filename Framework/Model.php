@@ -8,19 +8,25 @@ namespace Framework;
 
 class Model{
 
-	private $link;
+	static $link;
 
 	public function __construct()
 	{
-		$this->link = new PDO("mysql:host=localhost;dbname=db_demo","root","");
-		var_dump(1);exit;
-		$this->link->exec('set names utf8');
+		self::$link = new \PDO('mysql:host=localhost;dbname=lessdata', 'root', '');
 
+	}
+
+	public static function getModel()
+	{
+		if (isset(self::$link)) {
+			self::$link = new Model();
+		}
+		return self::$link;
 	}
 
 	public function query($sql)
 	{
-		$res = $this->link->exec($sql);
-		return $res;
+
+		
 	}
 }
