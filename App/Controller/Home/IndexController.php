@@ -10,8 +10,7 @@ class IndexController extends BaseController
 {
     public function index()
     {
-    	$obj = new \Framework\Model();
-        var_dump($obj);
+
         $this->assign('a', '你好');
         $this->view('Index/index');
     }

@@ -62,7 +62,6 @@ class View
        } */
 
         $cache_file = APP_PATH. 'Cache'.DS.Module_GROUP.DS.md5($content).'.php';
-
         if (!file_exists($cache_file)) {
             file_put_contents($cache_file, $content);
         }
