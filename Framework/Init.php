@@ -20,7 +20,7 @@ header('content-type:text/html;charset=utf8');
 date_default_timezone_set('PRC');
 
 //定义错误级别
-error_reporting(E_ALL);
+error_reporting(E_ALL^E_NOTICE);
 ini_set('display_errors', 1);
 
 //定义相关路径

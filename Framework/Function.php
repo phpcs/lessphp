@@ -52,6 +52,12 @@ function halt()
 {
     include ROOT_PATH.'/App/View/error.html';
     if (C('DEBUG')) {
+        if (func_num_args()>0) {
+            echo "<div style='background-color: #127fff;color:white;padding: 20px 20px'>";
+            echo func_get_arg(0);
+            echo "</div>";
+            echo '<hr/>';
+        }
         debug_print_backtrace();
     }
     exit;
@@ -81,3 +87,9 @@ function closed()
     exit;
 }
 
+function DB()
+{
+    $obj = \Framework\Db::getInstance();
+
+    return $obj;
+}

@@ -6,28 +6,40 @@
  */
 namespace Framework;
 
-class Db{
+class Db
+{
 
-	static $instance;
+    static $instance;
 
     public $link;
 
-	private function __construct()
-	{
-		$this->link = new \PDO('mysql:host=localhost;dbname=lessdata', 'root', 'cs123');
-	}
 
-	public static function getInstance()
-	{
-		if (!isset(self::$instance)) {
-			self::$instance = new Db();
-		}
-		return self::$instance;
-	}
+    private function __construct()
+    {
+        $this->link = new \PDO('mysql:host=localhost;dbname=lessdata', 'root', '');
+    }
 
-	public function query($sql)
-	{
+    public static function getInstance()
+    {
+        if (!isset(self::$instance)) {
+            self::$instance = new Db();
+        }
+        return self::$instance;
+    }
 
-		
-	}
+    public function query($sql)
+    {
+        $statment = $this->link->prepare($sql);
+        $statment->execute();
+
+        return $statment->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function insert($sql, $arr)
+    {
+        $statment = $this->link->prepare($sql);
+        $statment->execute($arr);
+
+        return $this->link->lastInsertId();
+    }
 }

@@ -133,7 +133,7 @@ class Kernel
                 case E_COMPILE_ERROR:
                 case E_USER_ERROR:
                     ob_end_clean();
-                    halt('文件:' . basename($e['file']) . ' ,第' . $e['line'] . '行发生错误');
+                    halt('文件:' . $e['file'] . ' ,第' . $e['line'] . '行发生错误');
                     break;
             }
         }
@@ -150,7 +150,10 @@ class Kernel
      */
     static public function appError($errno, $errstr, $errfile, $errline)
     {
-        halt('[文件:' . basename($errfile) . ' ,]第' . $errline . 'has error! ' . $errstr);
+        //var_dump(222);
+
+        //$error = '[文件:' . basename($errfile) . ' ,]第' . $errline . 'has error! ' . $errstr;
+        //echo $error;
     }
 
     /**
@@ -160,7 +163,7 @@ class Kernel
      */
     static public function appException($e)
     {
-        throw new Exception('发生异常');
+        p($e);
     }
 
     private function __clone()

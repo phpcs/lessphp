@@ -60,7 +60,7 @@ class View
         /*if (preg_match('#\{\$([a-zA-Z]+)\}#', $content)) {
             $content = preg_replace('#\{\$([a-zA-Z]+)\}#', '<?php echo \$this->value[\'\\1\']; ?>', $content);
        } */
-
+        extract($this->value);
         $cache_file = APP_PATH. 'Cache'.DS.Module_GROUP.DS.md5($content).'.php';
         if (!file_exists($cache_file)) {
             file_put_contents($cache_file, $content);

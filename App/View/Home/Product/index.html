@@ -1,11 +1,10 @@
-<include file="header.html"  />
     <div class="container">
-        <h1>test 商品</h1>
+        <h1>日志分类</h1>
         <ul>
-            <li>mac pro</li>
-            <li>mac air</li>
-            <li>iPhone</li>
-            <li>lenove</li>
+            <?php
+                 foreach ($list as $k=>$v) {
+                    echo "<li><a href='/product/info/id/".$v['id']."'>".$v['title']."</a></li>";
+                }
+            ?>
         </ul>
     </div>
-<include file="footer.html" />
