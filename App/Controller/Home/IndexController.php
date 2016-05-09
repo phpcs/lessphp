@@ -6,11 +6,14 @@
  */
 namespace App\Controller\Home;
 
+use Framework\Db;
+
 class IndexController extends BaseController
 {
     public function index()
     {
-
+        $db  = Db::getInstance();
+        var_dump($db);
         $this->assign('a', '你好');
         $this->view('Index/index');
     }
