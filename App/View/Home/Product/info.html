@@ -1,6 +1,21 @@
+<style>
+    .container .title{
+        font-size: 18px;
+        color: #111;
+        margin: 25px 0px;
+        text-align: center;
+        border-bottom: 1px solid #337abc;
+    }
+    .container .content{
+         background-color: #c2c2c2;
+         padding: 10px 10px;
+    }
+</style>
 <div class="container">
-<?php
-                  echo $info;
+    <?php
+        echo "<div class='title'>".$info['cate']." > ".$info['title']."</div>";
+        echo "<hr/>";
+        echo "<div class='content'>".$info['content']."</div>";
           ?>
 
 </div>

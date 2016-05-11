@@ -12,7 +12,6 @@ class ProductController extends \Framework\Controller
     {
         $sql = "SELECT * FROM article";
         $res = DB()->query($sql);
-
         $this->assign('list', $res);
         $this->view();
     }
@@ -23,8 +22,9 @@ class ProductController extends \Framework\Controller
         $sql = "SELECT * FROM article WHERE id=".$article_id;
         $res = DB()->query($sql);
 
-        $info = stripslashes($res[0]['content']);
-
+        $info['content'] = stripslashes($res[0]['content']);
+        $info ['title'] = $res[0]['title'];
+        $info ['cate'] = $res[0]['cate'];
         $this->assign('info', $info);
         $this->view();
     }

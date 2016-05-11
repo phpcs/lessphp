@@ -6,6 +6,6 @@
  */
 return array(
     'GROUP_LIST' => array('Home', 'Admin'),
-    'DEBUG'=>true,
+    'DEBUG'=>false,
     'LAYOUT'=>true
 );
