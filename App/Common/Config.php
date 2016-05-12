@@ -6,6 +6,8 @@
  */
 return array(
     'GROUP_LIST' => array('Home', 'Admin'),
-    'DEBUG'=>false,
-    'LAYOUT'=>true
+    'DEBUG'=>true,
+    'LAYOUT'=>true,
+    'DB_NAME'=>'lessdata',
+    'DB_PASS'=>'cs123'
 );

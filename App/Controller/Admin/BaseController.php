@@ -14,7 +14,7 @@ class BaseController extends \Framework\Controller
         parent::__construct();
     }
 
-    public function setTitle($title='LessPHP后台')
+    public function setTitle($title)
     {
         $this->assign('title', $title);
     }

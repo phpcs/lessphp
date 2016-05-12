@@ -8,8 +8,10 @@ namespace App\Controller\Admin;
 
 class ArticleController extends BaseController
 {
+
     public function index()
     {
+        $this->setTitle('日志列表');
         $this->view();
     }
 

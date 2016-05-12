@@ -1,1 +1,38 @@
-文章
+<div class="box box-primary">
+    <div class="box-header">
+        <h3 class="box-title">
+            应用包列表 <a type="button" href="/apps/package/add" class="btn btn-primary btn-md"><i class="fa fa-plus"></i> 新增</a>
+        </h3>
+    </div>
+    <div class="box-body">
+        <table id="category-list" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>分类名称</th>
+                <th>权重排序</th>
+                <th>添加时间</th>
+                <th>管理操作</th>
+            </tr>
+            </thead>
+            <volist name="list" id="vo">
+                <tr>
+                    <td>{$vo.vendor_id}</td>
+                    <td>{$vo.vendor_name}</td>
+                    <td>{$vo.amount}</td>
+                    <td>
+                        <if condition="$vo.model_type eq 1">
+                            Win ce
+                            <else />
+                            Android
+                        </if>
+                    </td>
+                    <td>{$vo.sub_vendor_id}</td>
+                    <td>{$vo.sub_vendor_name}</td>
+                    <td>{$vo.create_date}</td>
+                    <td>{$vo.creator}</td>
+                </tr>
+            </volist>
+        </table>
+    </div>
+</div>

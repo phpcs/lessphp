@@ -13,8 +13,8 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <img alt="User Image" class="user-image" src="/Public/img/user2-160x160.jpg">
-                            <span class="hidden-xs">admin</span>
+                            <img alt="User Image" class="user-image" src="/App/Static/img/pic.jpg">
+                            <span class="hidden-xs">Admin || <?php echo date('Y-m-d H:i:s'); ?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
@@ -44,7 +44,7 @@
         <section class="sidebar">
             <form action="#" method="get" class="sidebar-form">
                 <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="搜索..."/>
+                    <input type="text" name="q" class="form-control" placeholder=""/>
                     <span class="input-group-btn">
                         <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
                     </span>
@@ -55,18 +55,20 @@
     </aside>
 
     <div class="content-wrapper">
-        <section class="content-header">
+        <section class="content-header" style="padding:15px !important;">
             <h1>
-                11111
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li class="active">{$title}</li>
+                <li class="active"><?php echo $title;?></li>
             </ol>
         </section>
-
         <section class="content">
-            __CONTENT__
+            <div class="row">
+                <div class="col-md-12">
+                    __CONTENT__
+                </div>
+            </div>
         </section>
     </div>
 
@@ -74,7 +76,7 @@
         <div class="pull-right hidden-xs">
             <b>Version</b> 1.0.1
         </div>
-        <strong>Copyright &copy; 2014-2015 <a href="http://www.carbit.com.cn">上海申炘有限公司</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2014-2015 <a href="http://www.carbit.com.cn">Bruce 's Blog</a>.</strong> All rights reserved.
     </footer>
 
 </div>

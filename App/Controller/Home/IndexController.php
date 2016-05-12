@@ -11,7 +11,6 @@ class IndexController extends BaseController
 {
     public function index()
     {
-
         $this->view('Index/index');
     }
 

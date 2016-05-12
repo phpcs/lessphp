@@ -16,7 +16,7 @@ class Db
 
     private function __construct()
     {
-        $this->link = new \PDO('mysql:host=localhost;dbname=lessdata', 'root', '');
+        $this->link = new \PDO('mysql:host=localhost;dbname=lessdata', 'root', 'cs123');
     }
 
     public static function getInstance()
