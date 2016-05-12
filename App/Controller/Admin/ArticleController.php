@@ -15,4 +15,10 @@ class ArticleController extends BaseController
         $this->view();
     }
 
+    public function add()
+    {
+        $this->setTitle('添加日志');
+        $this->view();
+    }
+
 }

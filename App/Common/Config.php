@@ -8,6 +8,8 @@ return array(
     'GROUP_LIST' => array('Home', 'Admin'),
     'DEBUG'=>true,
     'LAYOUT'=>true,
+    'DB_HOST'=>'localhost',
+    'DB_USER'=>'root',
     'DB_NAME'=>'lessdata',
-    'DB_PASS'=>'cs123'
+    'DB_PASS'=>''
 );

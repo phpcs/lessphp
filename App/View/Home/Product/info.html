@@ -1,22 +1,25 @@
 <style>
-    .container .title{
+    .container .title {
         font-size: 18px;
         color: #111;
+        font-weight: 700;
         margin: 25px 0px;
         text-align: center;
-        border-bottom: 1px solid #337abc;
     }
-    .container .content{
-         background-color: #c2c2c2;
-         padding: 10px 10px;
+
+    .container .content {
+        background-color: #FFFFFF;
+        padding: 10px 10px;
+        font-weight: 500;
+        border: 1px solid #cccccc;
+        text-indent: 20px;
     }
 </style>
 <div class="container">
     <?php
         echo "<div class='title'>".$info['cate']." > ".$info['title']."</div>";
-        echo "<hr/>";
-        echo "<div class='content'>".$info['content']."</div>";
-          ?>
+        echo " <div class='content'>".$info['content']."</div>";
+?>
 
 
 </div>
