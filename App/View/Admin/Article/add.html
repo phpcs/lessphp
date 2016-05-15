@@ -12,9 +12,9 @@
         <div class="form-group">
             <label for="cate">类别</label>
             <select name="" id="cate" class="form-control">
-                <option value="">PHP</option>
-                <option value="">Linux</option>
-                <option value="">js</option>
+                <option value="1">PHP</option>
+                <option value="2">Linux</option>
+                <option value="3">javascript</option>
             </select>
         </div>
         <div class="form-group">
@@ -23,12 +23,13 @@
         </div>
     </div>
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">提交</button>
     </div>
 </div>
 
 <script type="text/javascript">
     $(function(){
+
         var editor;
         KindEditor.ready(function(K) {
             editor = K.create('textarea[name="content"]', {
@@ -37,5 +38,33 @@
                 height:'400px'
             });
             })
+
+        $('button').bind('click', function(){
+            var data = {
+                       title: $('#title').val(),
+                       cate: $('#cate').val(),
+                       content:editor.html()
+                   }
+
+                   var $data = JSON.stringify(data)
+                   var option = {
+                       url:'/Admin/Article/save',
+                       type:'post',
+                       data: $data,
+                       async:false,
+                       dataType:'json',
+                       success:function(res){
+                            if(res.code == 'ok') {
+                                bootbox.alert('OK')
+                            }
+
+                       }
+
+                   }
+
+                   $.ajax(option)
+        })
+
+
     })
 </script>

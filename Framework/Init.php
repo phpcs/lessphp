@@ -36,7 +36,8 @@ define('USER_CONFIG_FILE', APP_PATH . 'Common/Config.php');
 require CORE . 'Function.php';
 require CORE . 'Kernel.php';
 
-
+define('NOW_TIME', $_SERVER['REQUEST_TIME']);
+define('NOW_DATE', date('Y-m-d H:i:s', NOW_TIME));
 $app = new \Framework\Kernel();
 
 

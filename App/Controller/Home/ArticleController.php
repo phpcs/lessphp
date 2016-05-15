@@ -6,7 +6,7 @@
  */
 namespace App\Controller\Home;
 
-class ProductController extends \Framework\Controller
+class ArticleController extends \Framework\Controller
 {
     public function index()
     {
