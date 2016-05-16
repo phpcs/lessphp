@@ -8,16 +8,22 @@ a{
 body{
     font-size: 14px;
     font-family: "-apple-system","Open Sans","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color:#efefef
+}
+.warpper{
+    width: 100%;
     height: 100%;
-    background-color:#ffffff
 }
 .left-col {
-    background-image: url('../../../Static/img/nav_bg.jpg');
+    background-image: url('../../../Static/img/bg.png');
     background-color: #369abc;
     position: fixed;
     padding:30px 0;
     width: 250px;
     height: 100%;
+}
+.left-col h3{
+    color: #fff0f0;
 }
 .container{
     padding-left:45px !important;
@@ -48,13 +54,14 @@ body{
     padding: 10px 0px !important
 }
 #nav ul li>a{
-    color: #ffffff;
-    font-size: 16px;
+    color: #fff0f0;
+    font-weight: bold;
+    font-size: 18px;
     text-decoration: none;
 }
 #nav ul li>a:hover{
     color: #cccccc;
-    font-size: 16px;
+    font-size: 18px;
     text-decoration: none;
 }
 @media screen and (max-height:400px) {
@@ -74,18 +81,6 @@ body{
     margin: 0 0 !important
     }
 }
-
-/*@media screen and (min-width:1450px) {*/
-    /*.container {*/
-        /*width: 1200px;*/
-    /*}*/
-/*}*/
-
-/*@media screen and (max-width:1450px) {*/
-    /*.container {*/
-        /*width: 1100px;*/
-    /*}*/
-/*}*/
 
 
 /**适配手机屏css*******/

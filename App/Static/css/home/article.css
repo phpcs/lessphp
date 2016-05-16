@@ -1,0 +1,16 @@
+.container .list{
+    border-bottom: 1px solid #cccccc;
+    position: relative;
+}
+.container .list h4 a{
+    color: #000066;
+    font-size: 14px;
+}
+.container .list .time{
+    position: absolute;
+    bottom:1px;
+    position: absolute;right: 0px;
+    font-size: 12px;
+    color:#005f9b;
+    padding-right: 20px;
+}
