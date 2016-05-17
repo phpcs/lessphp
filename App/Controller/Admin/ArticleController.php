@@ -11,6 +11,10 @@ class ArticleController extends BaseController
 
     public function index()
     {
+        $sql = "SELECT * FROM article";
+        $res = DB()->query($sql);
+
+        $this->assign('list', $res);
         $this->setTitle('日志列表');
         $this->view();
     }
@@ -32,7 +36,7 @@ class ArticleController extends BaseController
         $data = $this->getInput();
         if ($data) {
             $sql = "INSERT INTO article VALUES(NULL, ?, ?, ?, ?, ?)";
-            $insert_data = [$data['title'], $data['content'], NOW_DATE, $data['cate'], 'PHP'];
+            $insert_data = [$data['title'], $data['content'], $data['cate'], NOW_DATE, NOW_DATE];
             $res = DB()->insert($sql, $insert_data);
             if ($res) {
                 echo json_encode(['code'=>'ok']);

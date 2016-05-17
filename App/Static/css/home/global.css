@@ -54,13 +54,14 @@ body{
     padding: 10px 0px !important
 }
 #nav ul li>a{
-    color: #fff0f0;
+    color: #d9edf7;
     font-weight: bold;
     font-size: 18px;
+    letter-spacing: 5px;
     text-decoration: none;
 }
 #nav ul li>a:hover{
-    color: #cccccc;
+    color: #fff;
     font-size: 18px;
     text-decoration: none;
 }
