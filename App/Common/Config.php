@@ -11,5 +11,5 @@ return array(
     'DB_HOST'=>'localhost',
     'DB_USER'=>'root',
     'DB_NAME'=>'lessdata',
-    'DB_PASS'=>''
+    'DB_PASS'=>'cs123'
 );

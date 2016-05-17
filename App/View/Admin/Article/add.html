@@ -55,7 +55,9 @@
                        dataType:'json',
                        success:function(res){
                             if(res.code == 'ok') {
-                                bootbox.alert('OK')
+                                window.location.href= '/Admin/article/index'
+                            } else {
+                                alert('添加失败')
                             }
 
                        }

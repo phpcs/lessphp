@@ -17,8 +17,13 @@ class ArticleController extends BaseController
 
     public function add()
     {
-
         $this->setTitle('添加日志');
+        $this->view();
+    }
+
+    public function edit()
+    {
+        $this->setTitle('修改日志');
         $this->view();
     }
 
@@ -27,14 +32,8 @@ class ArticleController extends BaseController
         $data = $this->getInput();
         if ($data) {
             $sql = "INSERT INTO article VALUES(NULL, ?, ?, ?, ?, ?)";
-            $insert_data[] = $data['title'];
-            $insert_data[] = $data['content'];
-            $insert_data[] = NOW_DATE;
-            $insert_data[] = $data['cate'];
-            $insert_data[] = 'PHP';
-
+            $insert_data = [$data['title'], $data['content'], NOW_DATE, $data['cate'], 'PHP'];
             $res = DB()->insert($sql, $insert_data);
-
             if ($res) {
                 echo json_encode(['code'=>'ok']);
             }

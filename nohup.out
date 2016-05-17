@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "../PyRedisAdmin/routes.py", line 9, in <module>
+    from config import  media_prefix
+  File "/srv/www/com.carbit/PyRedisAdmin/config.py", line 4
+SyntaxError: Non-ASCII character '\xe5' in file /srv/www/com.carbit/PyRedisAdmin/config.py on line 4, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details
+Traceback (most recent call last):
+  File "../PyRedisAdmin/routes.py", line 11, in <module>
+    import i18n
+  File "/srv/www/com.carbit/PyRedisAdmin/i18n.py", line 143, in <module>
+    api = gettext.translation('PyRedisAdmin', 'locale', languages=[config.lang])
+  File "/usr/lib/python2.7/gettext.py", line 484, in translation
+    raise IOError(ENOENT, 'No translation file found for domain', domain)
+IOError: [Errno 2] No translation file found for domain: 'PyRedisAdmin'
