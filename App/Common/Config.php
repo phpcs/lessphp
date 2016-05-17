@@ -11,6 +11,8 @@ return array(
     'DB_HOST'=>'139.196.34.157',
     'DB_USER'=>'root',
     'DB_NAME'=>'blog',
-    'DB_PASS'=>'cs123'
+    'DB_PASS'=>'cs123',
+    'USER_NAME' => 'admin',
+    'USER_PASS' => 'cs3894203',
 
 );

@@ -4,7 +4,7 @@
  * @author Bruce.cheng@carbit.com.cn
  * @date 16-3-23
  */
-
+session_start();
 /*统计执行时间*/
 global $START_TIME; //页面开始执行时间
 global $CORE_START_TIME; //框架开始执行时间
@@ -31,6 +31,8 @@ define('CORE', __DIR__ . DS);                          //核心路径
 
 define('DEFAULT_CONFIG_FILE', CORE . 'Config.php');
 define('USER_CONFIG_FILE', APP_PATH . 'Common/Config.php');
+
+define('IS_AJAX', (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && (strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')));
 
 //引入框架文件
 require CORE . 'Function.php';

@@ -25,4 +25,10 @@ class BaseController extends \Framework\Controller
         return json_decode(file_get_contents('php://input'), true);
     }
 
+    public function jsonEcho($data)
+    {
+        echo json_encode($data);
+        exit;
+    }
+
 }

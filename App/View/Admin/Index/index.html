@@ -7,12 +7,13 @@ __NO_LAYOUT__
     <meta name=robots content="noindex, nofollow">
     <title></title>
     <link rel=stylesheet href="/App/Static/css/admin/admin.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 </head>
 <body class="body-100">
 <div class="typecho-login-wrap">
     <div class="typecho-login"><h1><a href="/">bruce 's blog Admin</a></h1>
 
-        <form action="/Admin/index/panel/" method=post><p><label for=user class="sr-only">用户名</label><input type=text
+        <form action="/Admin/index" method=post onSubmit="return false;"><p><label for=user class="sr-only">用户名</label><input type=text
                                                                                                             id=user
                                                                                                             name=user
                                                                                                             value=""
@@ -30,7 +31,7 @@ __NO_LAYOUT__
                 <button type=submit class="btn btn-l w-100 primary">登录</button>
             </p>
         </form>
-        <p class="more-link">管理后台皮肤来自于<a href="http://typecho.org" target=_blank>Typecho</a>.</p></div>
+    <script type="text/javascript" src="/App/Static/js/Admin/login.js"></script>
 </div>
 </body>
 </html>

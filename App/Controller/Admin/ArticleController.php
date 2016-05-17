@@ -6,7 +6,9 @@
  */
 namespace App\Controller\Admin;
 
-class ArticleController extends BaseController
+use App\Controller\Admin;
+
+class ArticleController extends FatherController
 {
 
     public function index()
