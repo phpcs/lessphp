@@ -1,12 +1,10 @@
 <link rel="stylesheet" href="/App/Static/css/home/article.css" type="text/css" />
-<h3>日志分类</h3>
 <hr/>
     <?php
         $str = '';
          foreach ($list as $k=>$v) {
-            $time = substr($v['c_time'], 0 ,10);
             $str .= "<div class='list'>";
-            $str .= "<h4><a href='/article/info/id/{$v["id"]}'>".trim($v['title'])."</a><span class='time'>" .$time. "</span></h4>";
+            $str .= "<h4><a href='/article/info/id/{$v["id"]}'>".trim($v['title'])."</a><span class='time'>" .$v['time']. "</span></h4>";
             $str .= "</div>";
          }
 
