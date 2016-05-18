@@ -1,0 +1,77 @@
+<div class="box box-primary">
+    <div class="box-header">
+        <h3 class="box-title">
+            添加日志
+        </h3>
+    </div>
+    <div class="box-body">
+        <div class="form-group">
+            <label for="title">title</label>
+            <input type="email" class="form-control" id="title" placeholder="日志标题" value="<?php echo $list['title'];?>">
+        </div>
+        <div class="form-group">
+            <label for="cate">类别</label>
+            <select name="" id="cate" class="form-control">
+                <option value="1"
+                <?php if ($list['cate_id']==1) echo 'selected';?> >PHP</option>
+                <option value="2"
+                <?php if ($list['cate_id']==1) echo 'selected';?> >Linux</option>
+                <option value="3"
+                <?php if ($list['cate_id']==1) echo 'selected';?> >javascript</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="content">内容</label>
+            <textarea name="content" id="content" cols="30" rows="10"><?php echo $list['content'];?></textarea>
+        </div>
+    </div>
+    <div class="box-footer">
+        <input type="hidden" value="<?php echo $list['id'];?>"/>
+        <button type="submit" class="btn btn-primary">提交</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+
+        var editor;
+        KindEditor.ready(function (K) {
+            editor = K.create('textarea[name="content"]', {
+                allowFileManager: true,
+                width: '1000px',
+                height: '400px'
+            });
+        })
+
+        $('button').bind('click', function () {
+            var data = {
+                title: $('#title').val(),
+                cate: $('#cate').val(),
+                content: editor.html(),
+                id: $('input:hidden').val()
+            }
+
+            var $data = JSON.stringify(data)
+            var option = {
+                url: '/Admin/Article/save',
+                type: 'post',
+                data: $data,
+                async: false,
+                dataType: 'json',
+                success: function (res) {
+                    if (res.code == 'ok') {
+                        window.location.href = '/Admin/article/index'
+                    } else {
+                        alert('添加失败')
+                    }
+
+                }
+
+            }
+
+            $.ajax(option)
+        })
+
+
+    })
+</script>
