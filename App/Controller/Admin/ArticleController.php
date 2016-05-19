@@ -45,15 +45,14 @@ class ArticleController extends FatherController
         if (!$data['id']) {
             $sql = "INSERT INTO article VALUES(NULL, ?, ?, ?, ?, ?)";
             $insert_data = [$data['title'], $data['content'], $data['cate'], NOW_DATE, NOW_DATE];
-            $res = DB()->insert($sql, $insert_data);
+            $res = DB()->save($sql, $insert_data);
             if ($res) {
                 echo json_encode(['code'=>'ok']);
             }
         } else{
             $sql = "UPDATE article set title=?,content=?,cate_id=?,create_time=?,update_time=? WHERE id={$data['id']}";
-            var_dump($data);
             $insert_data = [$data['title'], $data['content'], $data['cate'], NOW_DATE, NOW_DATE];
-            $res = DB()->insert($sql, $insert_data);
+            $res = DB()->save($sql, $insert_data);
             if ($res) {
                 echo json_encode(['code'=>'ok']);
             }

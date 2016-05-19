@@ -35,11 +35,11 @@ class Db
         return $statment->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function insert($sql, $arr)
+    public function save($sql, $arr)
     {
         $statment = $this->link->prepare($sql);
         $statment->execute($arr);
 
-        return $this->link->lastInsertId();
+        return $statment->rowCount();
     }
 }

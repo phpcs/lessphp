@@ -27,7 +27,7 @@ class ArticleController extends \Framework\Controller
 
         $info['content'] = stripslashes($res[0]['content']);
         $info ['title'] = $res[0]['title'];
-        $info ['cate'] = $res[0]['cate'];
+        $info ['cate'] = $res[0]['cate_id'];
         $this->assign('info', $info);
         $this->view();
     }
