@@ -50,8 +50,8 @@ class ArticleController extends FatherController
                 echo json_encode(['code'=>'ok']);
             }
         } else{
-            $sql = "UPDATE article set title=?,content=?,cate_id=?,create_time=?,update_time=? WHERE id={$data['id']}";
-            $insert_data = [$data['title'], $data['content'], $data['cate'], NOW_DATE, NOW_DATE];
+            $sql = "UPDATE article set title=?,content=?,cate_id=?,update_time=? WHERE id={$data['id']}";
+            $insert_data = [$data['title'], $data['content'], $data['cate'], NOW_DATE];
             $res = DB()->save($sql, $insert_data);
             if ($res) {
                 echo json_encode(['code'=>'ok']);

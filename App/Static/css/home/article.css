@@ -1,15 +1,20 @@
+.article_list{
+    padding: 30px;
+    background-color: #fff;
+}
 .container .list{
     border-bottom: 1px solid #cccccc;
     position: relative;
+    padding-top: 18px;
 }
-.container .list h4 a{
-    color: #000066;
-    font-size: 14px;
+.container .list a{
+    color: #1f1f1f;
+    font-size: 16px;
 }
 .container .list .time{
     position: absolute;
     bottom:1px;
-    position: absolute;right: 0px;
+    right: 0px;
     font-size: 12px;
     color:#005f9b;
     padding-right: 20px;

@@ -1,0 +1,20 @@
+.profile{
+    margin-top: 10px;
+    border-bottom: 1px solid #111;
+    padding: 5px 30px;
+    position: relative;
+}
+.profile p{
+    text-indent: 3rem;
+    line-height: 24px;
+}
+.profile .more{
+    padding-top: 20px;
+    padding-bottom: 10px;
+    font-size:18px;
+    color:#085780
+}
+.profile .more>a:hover{
+    color: #00ab00;
+    cursor: pointer;
+}

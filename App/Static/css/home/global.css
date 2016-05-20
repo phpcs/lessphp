@@ -30,7 +30,7 @@ body{
     color: #E6B1B1;
 }
 .container{
-    padding-left:100px !important;
+    padding-left:20px !important;
     margin-left:260px !important;
     padding-right: 100px !important;
     word-break: break-all;
@@ -71,6 +71,9 @@ body{
     font-size: 18px;
     text-decoration: none;
 }
+.top{
+    height: 20px;
+}
 @media screen and (max-height:400px) {
     #header img{
         width: 60px !important;
@@ -97,8 +100,8 @@ body{
         margin: 0 auto !important;
     }
     .container{
-    padding:15px 15px !important;
-    margin:0 0 !important;
+        margin:0 0 !important;
+        padding:15px 15px !important;
     }
     .left-col{
         position: relative;
@@ -109,10 +112,6 @@ body{
         background: none;
         background: #101010;
 
-    }
-
-    #content{
-        margin-left: 15px;
     }
     .left-col ul{
         text-align: center;

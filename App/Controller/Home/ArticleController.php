@@ -19,6 +19,37 @@ class ArticleController extends \Framework\Controller
         $this->view();
     }
 
+    private function getTime($update_time)
+    {
+
+        $month = substr($update_time, 5, 2);
+        $day = substr($update_time, 8, 2);
+
+        $now_month = date('m');
+        $now_day = date('d');
+
+        if ($month == $now_month) {
+            $day_over = $now_day - $day;
+            switch($day_over) {
+                case 0:
+                    $res = '今天';
+                    break;
+                case 1:
+                    $res = '昨天';
+                    break;
+                case 2:
+                    $res = '前天';
+                    break;
+                default:
+                    $res = substr($update_time, 0, 10);
+            }
+        }else{
+            $res = $update_time;
+        }
+
+        return $res;
+    }
+
     public function info()
     {
         $article_id = $_GET['id'];
@@ -30,25 +61,5 @@ class ArticleController extends \Framework\Controller
         $info ['cate'] = $res[0]['cate_id'];
         $this->assign('info', $info);
         $this->view();
-    }
-
-    private function getTime($update_time)
-    {
-        $res = $update_time;
-        $date_time = strtotime($update_time);
-        $now_time = time();
-        $arr = [strtotime(date('Y-m-d') . ' 00:00:00'), strtotime(date('Y-m-d') . ' 23:59:59')];
-        if ( ($now_time >= $arr[0]) && ($now_time <= $arr[1])) {
-            $over = $now_time - $date_time;
-            if ($over<60) {
-                $res = $over. '秒前';
-            } elseif($over>60 && $over<3600) {
-                $res = ceil($over%60). '分钟前';
-            } else {
-                $res = ceil($over/3600). '小时前';
-            }
-        }
-
-        return $res;
     }
 }

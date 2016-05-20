@@ -1,13 +1,13 @@
 <link rel="stylesheet" href="/App/Static/css/home/article.css" type="text/css" />
-<hr/>
+<div class="top"></div>
+<div class="article_list">
     <?php
         $str = '';
          foreach ($list as $k=>$v) {
-            $str .= "<div class='list'>";
-            $str .= "<h4><a href='/article/info/id/{$v["id"]}'>".trim($v['title'])."</a><span class='time'>" .$v['time']. "</span></h4>";
-            $str .= "</div>";
-         }
-
-        echo $str;
-
+    $str .= "<div class='list'>";
+    $str .= "<a href='/article/info/id/{$v["id"]}'>".trim($v['title'])."</a><span class='time'>" .$v['time']. "</span>";
+    $str .= "</div>";
+    }
+    echo $str;
     ?>
+</div>
