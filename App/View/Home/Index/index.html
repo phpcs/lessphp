@@ -1,11 +1,21 @@
 <link rel="stylesheet" href="/App/Static/css/home/index.css"/>
 <div class="top"></div>
 <div style="background-color: #fff">
-    <div class="profile">
-        <h4>PHP 正则表达式</h4>
-        <p>
-            摘要: 思维导图点击下图，可以看具体内容！介绍 正则表达式，大家在开发中应该是经常用到，现在很多开发语言都有正则表达式的应用，比如javascript，java，.net,php等等，我今天就把我对正则表达式的理解跟大家唠唠，不当之处，请多多指教！需要知道的术语——下面的术语你知道多少?Δ 定界符Δ 字符域...阅读全文
-        </p>
-        <div class="more"><a href="">继续阅读</a></div>
-    </div>
+<?php
+$str= '';
+foreach($list as $k => &$v) {
+    $v['profile'] = iconv_substr($v['content'],0,300,'UTF-8');
+    $str .=<<<EOF
+      <div class="profile">
+          <h4>{$v['title']}</h4>
+          <p>
+              {$v['profile']}
+          </p>
+          <div class="more"><a href="/article/info/id/{$v['id']}">继续阅读</a></div>
+      </div>
+EOF;
+}
+    echo $str;
+?>
 </div>
+
