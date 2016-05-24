@@ -39,6 +39,19 @@ class ArticleController extends FatherController
         $this->view();
     }
 
+    public function del()
+    {
+        $id = $_POST['id'];
+        $data = ['status'=>0];
+        $sql = "DELETE FROM article WHERE id=?";
+        $res = DB()->save($sql, [$id]);
+        if ($res) {
+            $data = ['status'=>1];
+        }
+
+        $this->jsonEcho($data);
+    }
+
     public function save()
     {
         $data = $this->getInput();

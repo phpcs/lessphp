@@ -11,7 +11,7 @@ class IndexController extends BaseController
 {
     public function index()
     {
-        $sql  = "select id,content from article order by id desc limit 0,10 ";
+        $sql  = "select id,content,title from article order by id desc limit 0,10 ";
         $res = DB()->query($sql);
         $this->assign('list', $res);
         $this->view('Index/index');
