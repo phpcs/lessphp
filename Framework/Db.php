@@ -17,6 +17,7 @@ class Db
     private function __construct()
     {
         $this->link = new \PDO('mysql:host='.C('DB_HOST').';dbname=' . C('DB_NAME'), C('DB_USER'), C('DB_PASS'));
+        $this->link->exec('set names utf8');
     }
 
     public static function getInstance()
