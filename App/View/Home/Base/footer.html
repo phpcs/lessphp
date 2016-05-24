@@ -6,6 +6,17 @@
 <script>
     $(function(){
         $("pre.prettyprint").addClass("prettyprint linenums");
+
+        var url = location.pathname
+        console.log(url)
+
+        $('#nav>ul>li>a').each(function(e){
+            if ( ($(this).attr('href')) == url ) {
+                $('.active').removeClass()
+                $(this).parent().addClass('active')
+            }
+        })
+
     })
 </script>
 
