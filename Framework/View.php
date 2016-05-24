@@ -49,20 +49,20 @@ class View
 
     public function parseTemplate($content)
     {
-        if (C('LAYOUT') && ( strpos($content,'__NO_LAYOUT__')===false)) {
-            $layout = file_get_contents(APP_PATH . 'View' . DS . Module_GROUP . DS . 'layout.html');
-            $content = str_replace('__CONTENT__', $content, $layout);
-        } else {
-            $content = str_replace('__NO_LAYOUT__', '', $content);
-        }
-
-        $content = $this->replaceTemplate($content);
         /*if (preg_match('#\{\$([a-zA-Z]+)\}#', $content)) {
             $content = preg_replace('#\{\$([a-zA-Z]+)\}#', '<?php echo \$this->value[\'\\1\']; ?>', $content);
        } */
         extract($this->value);
         $cache_file = APP_PATH. 'Cache'.DS.Module_GROUP.DS.md5($content).'.php';
         if (!file_exists($cache_file)) {
+            if (C('LAYOUT') && ( strpos($content,'__NO_LAYOUT__')===false)) {
+                $layout = file_get_contents(APP_PATH . 'View' . DS . Module_GROUP . DS . 'layout.html');
+                $content = str_replace('__CONTENT__', $content, $layout);
+            } else {
+                $content = str_replace('__NO_LAYOUT__', '', $content);
+            }
+
+            $content = $this->replaceTemplate($content);
             file_put_contents($cache_file, $content);
         }
 

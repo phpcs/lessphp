@@ -4,13 +4,13 @@
 <?php
 $str= '';
 foreach($list as $k => &$v) {
-    $v['profile'] = iconv_substr($v['content'],0,300,'UTF-8');
+    $v['profile'] = iconv_substr($v['content'],0,100,'UTF-8');
     $str .=<<<EOF
       <div class="profile">
           <h4>{$v['title']}</h4>
-          <p>
+          <div class="profile_content">
               {$v['profile']}
-          </p>
+          </div>
           <div class="more"><a href="/article/info/id/{$v['id']}">继续阅读</a></div>
       </div>
 EOF;

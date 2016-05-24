@@ -4,14 +4,15 @@
     padding: 5px 30px;
     position: relative;
 }
-.profile p{
+.profile .profile_content{
+    height: 100px;
     text-indent: 3rem;
     line-height: 24px;
 }
 .profile .more{
     padding-top: 20px;
-    padding-bottom: 10px;
-    font-size:18px;
+    padding-bottom: 5px;
+    font-size:16px;
     color:#085780
 }
 .profile .more>a:hover{
