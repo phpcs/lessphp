@@ -7,9 +7,7 @@
 session_start();
 /*统计执行时间*/
 global $START_TIME; //页面开始执行时间
-global $CORE_START_TIME; //框架开始执行时间
-$START_TIME = microtime(true);
-$CORE_START_TIME = microtime(true);
+$START_TIME = microtime();
 
 //检测项目名称是否定义
 if (!defined('APP_NAME')) {

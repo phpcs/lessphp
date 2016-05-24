@@ -41,6 +41,7 @@ class Kernel
         define('Module_GROUP',ucfirst($this->g));
         define('Module_CONTROLLER',ucfirst($this->c));
         define('Module_ACTION',$this->a);
+
         if (class_exists($c_name)) {
             call_user_func(array(new $c_name, $this->a));
         }

@@ -93,3 +93,9 @@ function DB()
 
     return $obj;
 }
+
+function calcTime($time)
+{
+    list( $usec ,  $sec ) =  explode ( " " ,  $time);
+    return  ( (float)$usec  + (float)$sec );
+}

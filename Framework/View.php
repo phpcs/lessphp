@@ -66,7 +66,15 @@ class View
             file_put_contents($cache_file, $content);
         }
 
+        /**
+         * 框架运行时间
+         */
+        $time_end = calcTime(microtime());
+        $time_start = calcTime($GLOBALS['START_TIME']);
+        define('SPEND_TIME', $time_end-$time_start);
+
         include $cache_file;
+
     }
 
     /**
