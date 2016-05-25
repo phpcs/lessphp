@@ -43,10 +43,12 @@ class ArticleController extends FatherController
     {
         $id = $_POST['id'];
         $data = ['status'=>0];
-        $sql = "DELETE FROM article WHERE id=?";
-        $res = DB()->save($sql, [$id]);
-        if ($res) {
-            $data = ['status'=>1];
+        if ($id) {
+            $sql = "DELETE FROM article WHERE id=?";
+            $res = DB()->save($sql, [$id]);
+            if ($res) {
+                $data = ['status'=>1];
+            }
         }
 
         $this->jsonEcho($data);
