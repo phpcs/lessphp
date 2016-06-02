@@ -14,5 +14,10 @@ return array(
     'WEB_STATUS' => 1,    //1:正常, 0:关闭,
     'SEPARATER' => '/',
     'GROUP_LIST' => array('Home'),
-     'DEBUG' => true
+    'DEBUG' => true,
+
+    'TABLE_PRE'=> '',
+    'DB_CHART'=>'utf8',
+    'DB_PORT'=>3306,
+    'DB_TYPE'=>'mysql'
 );

@@ -87,11 +87,16 @@ function closed()
     exit;
 }
 
-function DB()
+function DB($sql)
 {
     $obj = \Framework\Db::getInstance();
-
-    return $obj;
+    preg_match('/([a-zA-Z]+)\s+/',$sql,$arr);
+    switch($do=strtolower($arr[1])) {
+        case 'select':
+            $res = $obj->select($sql);
+            break;
+    }
+    return $res;
 }
 
 function calcTime($time)
