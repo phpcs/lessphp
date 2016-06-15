@@ -513,51 +513,20 @@ class Db
 
     public function insert($table, $datas)
     {
-        $lastId = array();
+        $lastId = 0;
 
-        // Check indexed or associative array
-        if (!isset($datas[0])) {
-            $datas = array($datas);
+        $values = array();
+        $columns = array();
+        foreach ($datas as $key => $value) {
+            array_push($columns, $key);
+            array_push($values, $value);
         }
 
-        foreach ($datas as $data) {
-            $values = array();
-            $columns = array();
+        echo 'INSERT INTO "' . $this->prefix . $table . '" (' . implode(', ', $columns) . ') VALUES (' . implode($values, ', ') . ')';exit;
+        $this->pdo->exec('INSERT INTO "' . $this->prefix . $table . '" (' . implode(', ', $columns) . ') VALUES (' . implode($values, ', ') . ')');
+        $lastId = $this->pdo->lastInsertId();
 
-            foreach ($data as $key => $value) {
-                array_push($columns, $this->column_quote($key));
-
-                switch (gettype($value)) {
-                    case 'NULL':
-                        $values[] = 'NULL';
-                        break;
-
-                    case 'array':
-                        preg_match("/\(JSON\)\s*([\w]+)/i", $key, $column_match);
-
-                        $values[] = isset($column_match[0]) ?
-                            $this->quote(json_encode($value)) :
-                            $this->quote(serialize($value));
-                        break;
-
-                    case 'boolean':
-                        $values[] = ($value ? '1' : '0');
-                        break;
-
-                    case 'integer':
-                    case 'double':
-                    case 'string':
-                        $values[] = $this->fn_quote($key, $value);
-                        break;
-                }
-            }
-
-            $this->exec('INSERT INTO "' . $this->prefix . $table . '" (' . implode(', ', $columns) . ') VALUES (' . implode($values, ', ') . ')');
-
-            $lastId[] = $this->pdo->lastInsertId();
-        }
-
-        return count($lastId) > 1 ? $lastId : $lastId[0];
+        return $lastId;
     }
 
     public function update($table, $data, $where = null)
@@ -603,9 +572,9 @@ class Db
         return $this->exec('UPDATE "' . $this->prefix . $table . '" SET ' . implode(', ', $fields) . $this->where_clause($where));
     }
 
-    public function delete($table, $where)
+    public function delete($sql)
     {
-        return $this->exec('DELETE FROM "' . $this->prefix . $table . '"' . $this->where_clause($where));
+        return $this->exec($sql);
     }
 
     public function replace($table, $columns, $search = null, $replace = null, $where = null)

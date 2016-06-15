@@ -15,7 +15,7 @@ class ArticleController extends FatherController
     public function index()
     {
         $sql = "SELECT * FROM article";
-        $res = DB()->query($sql);
+        $res = DB($sql);
 
         $this->assign('list', $res);
         $this->setTitle('日志列表');
@@ -32,7 +32,7 @@ class ArticleController extends FatherController
     {
         $id = $_GET['id'];
         $sql = "SELECT * FROM article WHERE id=".$id;
-        $res = DB()->query($sql);
+        $res = DB($sql);
 
         $this->assign('list', $res[0]);
         $this->setTitle('修改日志');
@@ -58,9 +58,12 @@ class ArticleController extends FatherController
     {
         $data = $this->getInput();
         if (!$data['id']) {
-            $sql = "INSERT INTO article VALUES(NULL, ?, ?, ?, ?, ?)";
-            $insert_data = [$data['title'], $data['content'], $data['cate'], NOW_DATE, NOW_DATE];
-            $res = DB()->save($sql, $insert_data);
+            $arr['title'] = $data['title'];
+            $arr['content'] = $data['content'];
+            $arr['cate'] = $data['cate'];
+            $arr['create_time'] = NOW_TIME;
+            $arr['update_time'] = NOW_TIME;
+            $res = DB('article',$arr);
             if ($res) {
                 echo json_encode(['code'=>'ok']);
             }

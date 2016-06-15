@@ -11,115 +11,88 @@ class Kernel
 
     public function __construct()
     {
-        $this->g = C('D_G_F');
-        $this->c = C('D_C');
-        $this->a = C('D_A');
-        // 设定错误和异常处理
-        register_shutdown_function('\Framework\Kernel::fatalError');
-        set_error_handler('\Framework\Kernel::appError');
-        set_exception_handler('\Framework\Kernel::appException');
-        spl_autoload_register('\Framework\Kernel::autoLoad');
-        $this->start();
+        if (C('WEB_STATUS') == 0) {
+            closed();
+        }
     }
 
     /**
      * 根据处理后的request_uri获取分段参数
      */
-    public function start()
+    public static function start()
     {
-        if (C('WEB_STATUS') == 0) {
-            closed();
-        }
+        // 设定错误和异常处理
+        spl_autoload_register('\Framework\Kernel::autoLoad');
+
+        register_shutdown_function('\Framework\Kernel::fatalError');
+        set_error_handler('\Framework\Kernel::appError');
+        set_exception_handler('\Framework\Kernel::appException');
         switch (C('URL_MOD')) {
             case 1:     //传统模式
-                $this->tradition_uri();
+                self::tradition_uri();
                 break;
             default :       //pathinfo模式
-                $this->pathinfo_url();
-        }
-        $c_name = "\\" . APP_NAME . "\\Controller\\" . $this->g . "\\" . ucfirst($this->c) . C('D_C_NAME');
-        define('Module_GROUP',ucfirst($this->g));
-        define('Module_CONTROLLER',ucfirst($this->c));
-        define('Module_ACTION',$this->a);
-
-        if (class_exists($c_name)) {
-            call_user_func(array(new $c_name, $this->a));
+                self::pathinfo_url();
         }
     }
 
-    public function tradition_uri()
+    public static function tradition_uri()
     {
-        $this->g = isset($_GET['g']) ? $_GET['g'] : C('D_G_F');
-        $this->c = $_GET['c'];
-        $this->a = $_GET['a'];
+        define('GROUP', isset($_GET['g']) ? $_GET['g'] : C('DEFAULT_GROUP'));
+        define('CONTROLLER', $_GET['c']);
+        define('ACTION', $_GET['a']);
     }
 
-    public function pathinfo_url()
+    public static function pathinfo_url()
     {
         if (strpos($_SERVER['REQUEST_URI'], 'static') || strpos($_SERVER['REQUEST_URI'], 'static')){
             includeFile(ROOT_PATH.$_SERVER['REQUEST_URI']);
             return ;
         }
-        if ($uri = self::_parse_request_uri()) {
-            $query_arr = explode(C('SEPARATER'), $uri);
-            if (in_array($query_arr[0], C('GROUP_LIST'))) {
-                $this->g = $query_arr[0];
-                array_shift($query_arr);
-            }
-            $_length = count($query_arr);
-            if (!empty($query_arr)&& $_length < 2) {
-                $this->c = $query_arr[0];
-            } elseif(!empty($query_arr)&& $_length >= 2) {
-                $this->c = $query_arr[0];
-                $this->a = $query_arr[1];
-                $_arr = array_slice($query_arr, 2);
-                if ($_length>2) {
-                    for ($i = 0, $j = count($_arr); $i < $j; $i++) {
-                        if (even($i)) {
-                            if (isset($_arr[$i + 1])) {
-                                $_GET[$_arr[$i]] = $_arr[$i + 1];
-                            } else {
-                                $_GET[$_arr[$i]] = '';
-                            }
-                        }
-                    }
-                }
-            }
-            unset($_GET['s']);
-        }
-    }
+        $query_arr = explode(C('SEPARATER'), trim($_SERVER['REQUEST_URI'], '/'));
 
-    /**
-     * 处理request_uri
-     *
-     * @return string
-     */
-    static public function _parse_request_uri()
-    {
-        if (!isset($_SERVER['REQUEST_URI'], $_SERVER['SCRIPT_NAME'])) {
-            return '';
-        }
-        $filter_param = array('<', '>', '"', "'", '%3C', '%3E', '%22', '%27', '%3c', '%3e');
-        $query_str = str_replace($filter_param, '', $_SERVER['REQUEST_URI']);
+        define('GROUP', ( in_array(ucfirst($query_arr[0]), C('GROUP_LIST')) && (ucfirst($query_arr[0])==C('GROUP_DEFAULT')) )? $query_arr[0] : 'Home' );
 
-        $uri = parse_url('http://dummy' . $query_str);
-        $uri = isset($uri['path']) ? $uri['path'] : '';
-
-        if (strpos($uri, $_SERVER['SCRIPT_NAME']) === 0) {
-            $uri = (string)substr($uri, strlen($_SERVER['SCRIPT_NAME']));
-        } elseif (strpos($uri, dirname($_SERVER['SCRIPT_NAME'])) === 0) {
-            $uri = (string)substr($uri, strlen(dirname($_SERVER['SCRIPT_NAME'])));
+        if (GROUP == C('GROUP_DEFAULT')) {
+            array_shift($query_arr);
         }
 
-        return trim($uri, '/');
+        define('CONTROLLER', $query_arr[0] ? ucfirst($query_arr[0]) : C('DEFAULT_CONTROLLER'));
+
+        array_shift($query_arr);
+        define('ACTION', $query_arr[0] ?: C('DEFAULT_ACTION'));
+
+        array_shift($query_arr);
+        foreach ($query_arr as $key => $val) {
+            $_GET[$key] = $val;
+        }
+        $s_controller =  '\\'. APP_NAME . "\\Controller\\" . GROUP . "\\" . CONTROLLER .Controller;
+        if (!class_exists($s_controller)){
+            echo $s_controller . '控制器不存在';
+            exit;
+        }
+
+        $obj_conrtroller = new $s_controller;
+
+        if (!method_exists($obj_conrtroller, ACTION)) {
+            echo ACTION . '方法不存在';
+            exit;
+        }
+
+        call_user_func(array($obj_conrtroller, ACTION));
+
     }
 
     static public function autoLoad($classname)
     {
-        if (stripos($classname, '\\')) {
-            $str = str_replace('\\', '/', $classname);
+        if (strpos($classname , 'Framework') !==false) {
+            $classname = trim(strrchr($classname, '\\'), '\\');
+            $file_path = CORE  . $classname . __EXT__;
+        } elseif (substr($classname,-10)=='Controller') {
+            $classname = trim(strrchr($classname, '\\'), '\\');
+            $file_path = C_PATH . GROUP . DS . $classname . __EXT__;
         }
-        includeFile(ROOT_PATH . $str . '.php');
+        includeFile($file_path);
     }
 
     // 致命错误捕获

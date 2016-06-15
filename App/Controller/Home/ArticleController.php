@@ -6,12 +6,14 @@
  */
 namespace App\Controller\Home;
 
-class ArticleController extends \Framework\Controller
+class ArticleController
 {
     public function index()
     {
+        echo 'Article';
+        exit;
         $sql = "SELECT * FROM article";
-        $res = DB()->query($sql);
+        $res = DB($sql);
         foreach ($res as $k => &$v) {
             $v['time'] = $this->getTime($v['update_time']);
         }
@@ -54,7 +56,7 @@ class ArticleController extends \Framework\Controller
     {
         $article_id = $_GET['id'];
         $sql = "SELECT * FROM article WHERE id=" . $article_id;
-        $res = DB()->query($sql);
+        $res = DB($sql);
 
         $info['content'] = stripslashes($res[0]['content']);
         $info ['title'] = $res[0]['title'];

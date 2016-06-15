@@ -44,15 +44,15 @@ function includeFile($file)
     if (file_exists($file)) {
         include $file;
     } else {
-        halt();
+        echo $file . '不存在';
     }
 }
 
 function halt()
 {
-    include ROOT_PATH.'/App/View/error.html';
+    include ROOT_PATH . '/App/View/error.html';
     if (C('DEBUG')) {
-        if (func_num_args()>0) {
+        if (func_num_args() > 0) {
             echo "<div style='background-color: #127fff;color:white;padding: 20px 20px'>";
             echo func_get_arg(0);
             echo "</div>";
@@ -90,17 +90,26 @@ function closed()
 function DB($sql)
 {
     $obj = \Framework\Db::getInstance();
-    preg_match('/([a-zA-Z]+)\s+/',$sql,$arr);
-    switch($do=strtolower($arr[1])) {
-        case 'select':
-            $res = $obj->select($sql);
-            break;
+    if (func_num_args() == 2) {
+        $res = $obj->insert(func_get_arg(0), func_get_arg(1));
+    } elseif (func_num_args() == 1) {
+        preg_match('/([a-zA-Z]+)\s+/', $sql, $arr);
+        switch ($do = strtolower($arr[1])) {
+            case 'select':
+                $res = $obj->select($sql);
+                break;
+            case 'delete':
+                $res = $obj->delete($sql);
+                break;
+        }
     }
+
     return $res;
+
 }
 
 function calcTime($time)
 {
-    list( $usec ,  $sec ) =  explode ( " " ,  $time);
-    return  ( (float)$usec  + (float)$sec );
+    list($usec, $sec) = explode(" ", $time);
+    return ((float)$usec + (float)$sec);
 }

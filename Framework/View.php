@@ -21,10 +21,11 @@ class View
      */
     public function view($file)
     {
+        $this->view_dir  = V_PATH . GROUP . DS;
         if (empty($file)) {
-            $file = Module_CONTROLLER.DS.Module_ACTION;
+            $file = CONTROLLER . DS . ACTION;
         }
-        $this->view_path = APP_PATH . 'View' . DS . Module_GROUP . DS . $file . '.html';
+        $this->view_path = $this->view_dir . $file . '.html';
         unset($file);
         extract($this->value);
         $content = file_get_contents($this->view_path);
@@ -39,7 +40,7 @@ class View
         preg_match_all('#<include\s+file=\s?(\"|\')\s?(.*?)\s?(\"|\')\s+/>#', $content, $arr);
         if ($arr) {
             foreach ($arr[2] as $k => $v) {
-                $s_include = file_get_contents(APP_PATH . 'View' . DS . Module_GROUP . DS . 'Base' . DS . $v);
+                $s_include = file_get_contents($this->view_dir . 'Base' . DS . $v);
                 $content = str_replace($arr[0][$k], $s_include, $content);
 
             }
@@ -53,10 +54,10 @@ class View
             $content = preg_replace('#\{\$([a-zA-Z]+)\}#', '<?php echo \$this->value[\'\\1\']; ?>', $content);
        } */
         extract($this->value);
-        $cache_file = APP_PATH. 'Cache'.DS.Module_GROUP.DS.md5($content).'.php';
-        if (!file_exists($cache_file)) {
+        $cache_file = APP_PATH. 'Cache'. DS . GROUP . DS . md5($content).'.php';
+        if ( C('DEBUG') ) {
             if (C('LAYOUT') && ( strpos($content,'__NO_LAYOUT__')===false)) {
-                $layout = file_get_contents(APP_PATH . 'View' . DS . Module_GROUP . DS . 'layout.html');
+                $layout = file_get_contents($this->view_dir . 'layout.html');
                 $content = str_replace('__CONTENT__', $content, $layout);
             } else {
                 $content = str_replace('__NO_LAYOUT__', '', $content);
