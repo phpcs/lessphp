@@ -49,11 +49,10 @@ class Kernel
             includeFile(ROOT_PATH.$_SERVER['REQUEST_URI']);
             return ;
         }
+
         $query_arr = explode(C('SEPARATER'), trim($_SERVER['REQUEST_URI'], '/'));
-
-        define('GROUP', ( in_array(ucfirst($query_arr[0]), C('GROUP_LIST')) && (ucfirst($query_arr[0])==C('GROUP_DEFAULT')) )? $query_arr[0] : 'Home' );
-
-        if (GROUP == C('GROUP_DEFAULT')) {
+        define('GROUP', ( in_array(ucfirst($query_arr[0]), C('GROUP_LIST')) && (ucfirst($query_arr[0])!=C('DEFAULT_GROUP')) )? $query_arr[0] : 'Home' );
+        if (GROUP != C('DEFAULT_GROUP')) {
             array_shift($query_arr);
         }
 

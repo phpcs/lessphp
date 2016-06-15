@@ -31,7 +31,7 @@ class ArticleController extends FatherController
     public function edit()
     {
         $id = $_GET['id'];
-        $sql = "SELECT * FROM article WHERE id=".$id;
+        $sql = "SELECT * FROM article WHERE id=" . $id;
         $res = DB($sql);
 
         $this->assign('list', $res[0]);
@@ -42,12 +42,11 @@ class ArticleController extends FatherController
     public function del()
     {
         $id = $_POST['id'];
-        $data = ['status'=>0];
+        $data = ['status' => 0];
         if ($id) {
-            $sql = "DELETE FROM article WHERE id=?";
-            $res = DB()->save($sql, [$id]);
+            $res = DB('del', 'article', $id);
             if ($res) {
-                $data = ['status'=>1];
+                $data = ['status' => 1];
             }
         }
 
@@ -60,19 +59,18 @@ class ArticleController extends FatherController
         if (!$data['id']) {
             $arr['title'] = $data['title'];
             $arr['content'] = $data['content'];
-            $arr['cate'] = $data['cate'];
-            $arr['create_time'] = NOW_TIME;
-            $arr['update_time'] = NOW_TIME;
-            $res = DB('article',$arr);
+            $arr['cate_id'] = $data['cate'];
+            $arr['create_time'] = NOW_DATE;
+            $arr['update_time'] = NOW_DATE;
+            $res = DB(array('save', 'article', $arr));
             if ($res) {
-                echo json_encode(['code'=>'ok']);
+                echo json_encode(['code' => 'ok']);
             }
-        } else{
-            $sql = "UPDATE article set title=?,content=?,cate_id=?,update_time=? WHERE id={$data['id']}";
+        } else {
             $insert_data = [$data['title'], $data['content'], $data['cate'], NOW_DATE];
-            $res = DB()->save($sql, $insert_data);
+            $res = DB(array('save', 'article', $insert_data));
             if ($res) {
-                echo json_encode(['code'=>'ok']);
+                echo json_encode(['code' => 'ok']);
             }
         }
     }

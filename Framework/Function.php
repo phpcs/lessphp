@@ -90,9 +90,7 @@ function closed()
 function DB($sql)
 {
     $obj = \Framework\Db::getInstance();
-    if (func_num_args() == 2) {
-        $res = $obj->insert(func_get_arg(0), func_get_arg(1));
-    } elseif (func_num_args() == 1) {
+    if (is_string($sql)) {
         preg_match('/([a-zA-Z]+)\s+/', $sql, $arr);
         switch ($do = strtolower($arr[1])) {
             case 'select':
@@ -101,6 +99,12 @@ function DB($sql)
             case 'delete':
                 $res = $obj->delete($sql);
                 break;
+        }
+    } elseif (is_array($sql)) {
+        if (strtolower($sql[0])=='save'){
+            $obj->insert($sql[1], $sql[2]);
+        } elseif(strtolower($sql[0]=='del')){
+            $obj->del($sql[1], $sql[2]);
         }
     }
 

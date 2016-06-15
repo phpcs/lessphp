@@ -6,7 +6,6 @@
  */
 return array(
     'GROUP_LIST' => array('Home', 'Admin'),
-    'DEFAULT_GROUP'=> 'Home',
     'DEBUG'=>true,
     'LAYOUT'=>true,                             //开启布局
     'DB_HOST'=>'139.196.34.157',
