@@ -96,15 +96,16 @@ function DB($sql)
             case 'select':
                 $res = $obj->select($sql);
                 break;
-            case 'delete':
-                $res = $obj->delete($sql);
-                break;
+            default:
+                $res = 'sql 有错误';
         }
     } elseif (is_array($sql)) {
         if (strtolower($sql[0])=='save'){
-            $obj->insert($sql[1], $sql[2]);
+            $res = $obj->insert($sql[1], $sql[2]);
         } elseif(strtolower($sql[0]=='del')){
-            $obj->del($sql[1], $sql[2]);
+            $res = $obj->del($sql[1], $sql[2]);
+        } elseif (strtolower($sql[0]=='edit')) {
+            $res = $obj->update($sql[1], $sql[2]);
         }
     }
 

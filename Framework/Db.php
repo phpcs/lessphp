@@ -87,13 +87,29 @@ class Db
     public function select($sql)
     {
         $query = $this->query($sql);
+        
         return $query ? $query->fetchAll(\PDO::FETCH_ASSOC) : false;
+    }
+    
+    public function del($table, $key_conditon)
+    {
+        if (!$key_conditon){
+            return false;
+        }
+
+        if (!is_array($key_conditon)) {
+            $where = " WHERE id=". $key_conditon;
+        } else {
+            $where = " WHERE " . array_keys($key_conditon)[0] . "=" .array_pop($key_conditon);
+        }
+
+        $res = $this->pdo->exec("DELETE FROM " . $this->prefix . $table . $where );
+
+        return $res;
     }
 
     public function insert($table, $datas)
     {
-        $lastId = 0;
-
         $values = array();
         $columns = array();
         foreach ($datas as $key => $value) {
@@ -101,10 +117,31 @@ class Db
             array_push($values, "'". $value. "'");
         }
         $sql = 'INSERT INTO '. $this->prefix . $table . '(' . implode(', ', $columns) . ') VALUES (' . implode($values, ', ') . ')';
-        $res = $this->pdo->exec($sql);
+        $this->pdo->exec($sql);
         $lastId = $this->pdo->lastInsertId();
 
         return $lastId;
+    }
+
+    public function update($table, $data)
+    {
+        $set_str = '';
+        foreach ($data as $key => &$value) {
+            if ($key=='id') {
+                $where = ' WHERE id='. $value;
+                unset($data[$key]);
+            }
+            if (is_string($key)) {
+                $set_str .=$key . "='" . $value . "',";
+            }
+        }
+        if ($set_str) {
+            $set_str = rtrim(' SET '. $set_str, ",");
+        }
+        $sql = 'UPDATE '. $this->prefix . $table . $set_str . $where;
+        $res = $this->pdo->exec($sql);
+
+        return $res;
     }
 
     public function info()

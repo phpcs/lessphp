@@ -6,7 +6,7 @@
  */
 namespace App\Controller\Home;
 
-class ArticleController
+class ArticleController extends BaseController
 {
     public function index()
     {

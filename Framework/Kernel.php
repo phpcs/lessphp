@@ -62,8 +62,9 @@ class Kernel
         define('ACTION', $query_arr[0] ?: C('DEFAULT_ACTION'));
 
         array_shift($query_arr);
-        foreach ($query_arr as $key => $val) {
-            $_GET[$key] = $val;
+        for($i=0, $j=count($query_arr)-1 ; $i<$j ; $i++){
+            $_GET[$query_arr[$i]] = $query_arr[$i+1];
+            $i++;
         }
         $s_controller =  '\\'. APP_NAME . "\\Controller\\" . GROUP . "\\" . CONTROLLER .Controller;
         if (!class_exists($s_controller)){

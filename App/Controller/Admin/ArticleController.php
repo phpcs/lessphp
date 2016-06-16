@@ -44,7 +44,7 @@ class ArticleController extends FatherController
         $id = $_POST['id'];
         $data = ['status' => 0];
         if ($id) {
-            $res = DB('del', 'article', $id);
+            $res = DB(array('del', 'article', $id));
             if ($res) {
                 $data = ['status' => 1];
             }
@@ -62,13 +62,13 @@ class ArticleController extends FatherController
             $arr['cate_id'] = $data['cate'];
             $arr['create_time'] = NOW_DATE;
             $arr['update_time'] = NOW_DATE;
-            $res = DB(array('save', 'article', $arr));
+            $res = DB(array('edit', 'article', $arr));
             if ($res) {
                 echo json_encode(['code' => 'ok']);
             }
         } else {
-            $insert_data = [$data['title'], $data['content'], $data['cate'], NOW_DATE];
-            $res = DB(array('save', 'article', $insert_data));
+            $insert_data = ['id'=>$data['id'], 'title'=>$data['title'], 'content'=>$data['content'], 'cate_id'=>$data['cate'], 'update_time'=>NOW_DATE];
+            $res = DB(array('edit', 'article', $insert_data));
             if ($res) {
                 echo json_encode(['code' => 'ok']);
             }
