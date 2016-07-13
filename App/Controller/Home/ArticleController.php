@@ -61,6 +61,7 @@ class ArticleController extends BaseController
         $info['content'] = stripslashes($res[0]['content']);
         $info ['title'] = $res[0]['title'];
         $info ['cate'] = $res[0]['cate_id'];
+        $info ['id'] = $res[0]['id'];
         $this->assign('info', $info);
         $this->view();
     }
