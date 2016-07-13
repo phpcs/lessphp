@@ -35,7 +35,7 @@ function returnConfig($file)
     if (file_exists($file)) {
         return include $file;
     } else {
-        halt('文件：' . $file . '不存在');
+        throw new \Exception('发生错误' ,1);
     }
 }
 
@@ -44,8 +44,7 @@ function includeFile($file)
     if (file_exists($file)) {
         include $file;
     } else {
-        echo $file . '不存在';
-        echo '<br/>';
+        throw new \Exception('发生错误' ,1);
     }
 }
 

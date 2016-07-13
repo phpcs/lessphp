@@ -67,19 +67,14 @@ class Kernel
             $i++;
         }
         $s_controller =  '\\'. APP_NAME . "\\Controller\\" . GROUP . "\\" . CONTROLLER .Controller;
-        if (!class_exists($s_controller)){
-            echo $s_controller . '控制器不存在';
-            exit;
+        if (class_exists($s_controller)){
+            $obj_conrtroller = new $s_controller;
         }
-
-        $obj_conrtroller = new $s_controller;
-
-        if (!method_exists($obj_conrtroller, ACTION)) {
-            echo ACTION . '方法不存在';
-            exit;
+        if (method_exists($obj_conrtroller, ACTION)) {
+            call_user_func(array($obj_conrtroller, ACTION));
+        } else{
+            throw new  \Exception('不存在的方法', 1);
         }
-
-        call_user_func(array($obj_conrtroller, ACTION));
 
     }
 
@@ -104,7 +99,7 @@ class Kernel
 
     static public function fatalError()
     {
-        if ($e = error_get_last()) {
+/*        if ($e = error_get_last()) {
             switch ($e['type']) {
                 case E_ERROR:
                 case E_PARSE:
@@ -115,7 +110,7 @@ class Kernel
                     halt('文件:' . $e['file'] . ' ,第' . $e['line'] . '行发生错误');
                     break;
             }
-        }
+        }*/
     }
 
     /**
@@ -142,11 +137,20 @@ class Kernel
      */
     static public function appException($e)
     {
-        p($e);
+        $str = '<div style="background-color: #cccccc">__exception</div>';
+        if (!C('DEBUG')) {
+            $error = '程序发生异常';
+        } else {
+            $error = new LessException($e);
+        }
+
+        echo str_replace(['__exception', ROOT_PATH], [$error, '******'. DS], $str);
+        exit;
     }
 
     private function __clone()
     {
+
     }
 
 }
