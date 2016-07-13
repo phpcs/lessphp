@@ -16,6 +16,7 @@ global $START_TIME; //页面开始执行时间
 $START_TIME = microtime();
 
 header('content-type:text/html;charset=utf8');
+header('X-Powered-By:LessPHP');
 date_default_timezone_set('PRC');
 
 //定义错误级别
