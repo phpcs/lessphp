@@ -14,4 +14,8 @@ return array(
     'DB_PASS'=>'cs123',
     'USER_NAME' => 'admin',
     'USER_PASS' => 'cs3894203',
+    'URL_ROUTE' => true,
+    'URL_ROUTE_MAP'=>[
+        'article/(\d+)' => ['a'=>'info', 'key'=>'id']
+    ]
 );

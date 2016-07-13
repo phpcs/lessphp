@@ -5,7 +5,7 @@
         $str = '';
          foreach ($list as $k=>$v) {
     $str .= "<div class='list'>";
-    $str .= "<a href='/article/info/id/{$v["id"]}'>".trim($v['title'])."</a><span class='time'>" .$v['time']. "</span>";
+    $str .= "<a href='/article/{$v["id"]}'>".trim($v['title'])."</a><span class='time'>" .$v['time']. "</span>";
     $str .= "</div>";
     }
     echo $str;
