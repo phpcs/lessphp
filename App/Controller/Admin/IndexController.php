@@ -14,12 +14,10 @@ class IndexController extends BaseController
             $user = $_POST['user'];
             $pass = $_POST['password'];
             $code = $_POST['verify_code'];
-            if ($user == C('USER_NAME') && $pass == c('USER_PASS') && ($code==$_SESSION['captcha_code'])) {
+            if ($user == C('USER_NAME') && $pass == c('USER_PASS') && (strtolower($code)==strtolower($_SESSION['captcha_code']))) {
                 $_SESSION['login']=1;
                 $this->jsonEcho(['code' => 1, 'mes' => 'success']);
             } else {
-                var_dump($code);
-                var_dump($_SESSION['captcha_code']);
                 $this->jsonEcho(['code' => 0, 'mes' => 'fail']);
             }
         }
