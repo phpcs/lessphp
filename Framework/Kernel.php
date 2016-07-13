@@ -51,25 +51,42 @@ class Kernel
         }
 
         $query_arr = explode(C('SEPARATER'), trim($_SERVER['REQUEST_URI'], '/'));
+
         define('GROUP', ( in_array(ucfirst($query_arr[0]), C('GROUP_LIST')) && (ucfirst($query_arr[0])!=C('DEFAULT_GROUP')) )? $query_arr[0] : 'Home' );
         if (GROUP != C('DEFAULT_GROUP')) {
             array_shift($query_arr);
         }
 
-        define('CONTROLLER', $query_arr[0] ? ucfirst($query_arr[0]) : C('DEFAULT_CONTROLLER'));
-
-        array_shift($query_arr);
-        define('ACTION', $query_arr[0] ?: C('DEFAULT_ACTION'));
-
-        array_shift($query_arr);
-        for($i=0, $j=count($query_arr)-1 ; $i<$j ; $i++){
-            $_GET[$query_arr[$i]] = $query_arr[$i+1];
-            $i++;
+        //匹配自定义路由
+        if (C('URL_ROUTE')){
+            $maps = C('URL_ROUTE_MAP');
+            foreach ($maps as $k=>$v) {
+                $pattern = "#" . $k . "#";
+                if (preg_match($pattern, $query_arr[0]  . C('SEPARATER') . $query_arr[1], $mathes)) {
+                    define('CONTROLLER', $query_arr[0] ? ucfirst($query_arr[0]) : C('DEFAULT_CONTROLLER'));
+                    define('ACTION', $v['a']);
+                    $_GET[$v['key']] = $mathes[1];
+                    break;
+                }
+            }
         }
+
+        if (!defined(CONTROLLER)) {
+            define('CONTROLLER', $query_arr[0] ? ucfirst($query_arr[0]) : C('DEFAULT_CONTROLLER'));
+            array_shift($query_arr);
+            define('ACTION', $query_arr[0] ?: C('DEFAULT_ACTION'));
+            array_shift($query_arr);
+            for($i=0, $j=count($query_arr)-1 ; $i<$j ; $i++){
+                $_GET[$query_arr[$i]] = $query_arr[$i+1];
+                $i++;
+            }
+        }
+
         $s_controller =  '\\'. APP_NAME . "\\Controller\\" . GROUP . "\\" . CONTROLLER .Controller;
         if (class_exists($s_controller)){
             $obj_conrtroller = new $s_controller;
         }
+
         if (method_exists($obj_conrtroller, ACTION)) {
             call_user_func(array($obj_conrtroller, ACTION));
         } else{
