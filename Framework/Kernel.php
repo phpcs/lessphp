@@ -86,8 +86,13 @@ class Kernel
     static public function autoLoad($classname)
     {
         if (strpos($classname , 'Framework') !==false) {
-            $classname = trim(strrchr($classname, '\\'), '\\');
-            $file_path = CORE  . $classname . __EXT__;
+            if (strpos($classname, 'lib') !==false){
+                $classname = ltrim(strrchr($classname, '\\'), '\\');
+                $file_path = CORE . 'lib' . DS . '' . $classname . __EXT__;
+            } else {
+                $classname = trim(strrchr($classname, '\\'), '\\');
+                $file_path = CORE  . $classname . __EXT__;
+            }
         } elseif (substr($classname,-10)=='Controller') {
             $classname = trim(strrchr($classname, '\\'), '\\');
             $file_path = C_PATH . GROUP . DS . $classname . __EXT__;

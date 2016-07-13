@@ -11,27 +11,34 @@ __NO_LAYOUT__
 </head>
 <body class="body-100">
 <div class="typecho-login-wrap">
-    <div class="typecho-login"><h1><a href="/">bruce 's blog Admin</a></h1>
+    <div class="typecho-login"><h1><a href="/" style="color: #36ABE6">bruce 's blog Admin</a></h1>
 
-        <form action="/Admin/index" method=post onSubmit="return false;"><p><label for=user class="sr-only">用户名</label><input type=text
-                                                                                                            id=user
-                                                                                                            name=user
-                                                                                                            value=""
-                                                                                                            placeholder="用户名"
-                                                                                                            class="text-l w-100">
+        <form action="/Admin/index" method=post onSubmit="return false;"><p><label for=user
+                                                                                   class="sr-only">用户名</label><input
+                type=text
+                id=user
+                name=user
+                value=""
+                placeholder="用户名"
+                class="text-l w-100">
         </p>
 
-            <p><label for=password class="sr-only">密码</label><input type=password id=password name=password
-                                                                    class="text-l w-100" placeholder="密码"></p>
+            <p><label for=password class="sr-only">密码</label>
+                <input type=password id=password name=password class="text-l w-100" placeholder="密码">
+            </p>
 
-            <p><label for=code class="sr-only">两步验证</label><input type=text id=code name=code class="text-l w-100"
-                                                                  placeholder="两步验证"></p>
-
+            <p><label for=verify class="sr-only">验证码</label>
+                <input type=password id=verify_code name=verify_code
+                       class="text-l w-100" placeholder="验证码">
+            </p>
+            <p>
+                <img id=code src="/Admin/Index/getCodePut" alt="" onclick="this.src='/Admin/Index/getCodePut'" style="cursor: pointer" >
+            </p>
             <p class=submit>
-                <button type=submit class="btn btn-l w-100 primary">登录</button>
+                <button type=submit class="btn btn-l w-100 primary" style="background-color: #36ABE6">登录</button>
             </p>
         </form>
-    <script type="text/javascript" src="/App/Static/js/Admin/login.js"></script>
-</div>
+        <script type="text/javascript" src="/App/Static/js/Admin/login.js"></script>
+    </div>
 </body>
 </html>

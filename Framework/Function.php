@@ -45,6 +45,7 @@ function includeFile($file)
         include $file;
     } else {
         echo $file . '不存在';
+        echo '<br/>';
     }
 }
 

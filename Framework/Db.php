@@ -114,10 +114,12 @@ class Db
         $columns = array();
         foreach ($datas as $key => $value) {
             array_push($columns, $key);
-            array_push($values, "'". $value. "'");
+            array_push($values, "?");
+            $bindParams[] = $value;
         }
         $sql = 'INSERT INTO '. $this->prefix . $table . '(' . implode(', ', $columns) . ') VALUES (' . implode($values, ', ') . ')';
-        $this->pdo->exec($sql);
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute($bindParams);
         $lastId = $this->pdo->lastInsertId();
 
         return $lastId;
@@ -130,17 +132,20 @@ class Db
             if ($key=='id') {
                 $where = ' WHERE id='. $value;
                 unset($data[$key]);
+            } else{
+                if (is_string($key)) {
+                    $set_str .=$key . "=?,";
+                }
             }
-            if (is_string($key)) {
-                $set_str .=$key . "='" . $value . "',";
-            }
+
         }
         if ($set_str) {
             $set_str = rtrim(' SET '. $set_str, ",");
         }
         $sql = 'UPDATE '. $this->prefix . $table . $set_str . $where;
-        $res = $this->pdo->exec($sql);
-
+        $statement = $this->pdo->prepare($sql);
+        $res = $statement->execute(array_values($data));
+        
         return $res;
     }
 

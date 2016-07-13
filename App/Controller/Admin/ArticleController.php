@@ -33,7 +33,7 @@ class ArticleController extends FatherController
         $id = $_GET['id'];
         $sql = "SELECT * FROM article WHERE id=" . $id;
         $res = DB($sql);
-
+        
         $this->assign('list', $res[0]);
         $this->setTitle('修改日志');
         $this->view();
@@ -62,7 +62,7 @@ class ArticleController extends FatherController
             $arr['cate_id'] = $data['cate'];
             $arr['create_time'] = NOW_DATE;
             $arr['update_time'] = NOW_DATE;
-            $res = DB(array('edit', 'article', $arr));
+            $res = DB(array('save', 'article', $arr));
             if ($res) {
                 echo json_encode(['code' => 'ok']);
             }
