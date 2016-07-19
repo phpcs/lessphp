@@ -1,6 +1,6 @@
 .profile{
     margin-top: 10px;
-    border-bottom: 1px solid #cccccc;
+    border-bottom: 1px dashed #cccccc;
     padding: 5px 30px;
     position: relative;
 }

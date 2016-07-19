@@ -19,6 +19,7 @@ body{
     position: fixed;
     padding:30px 0;
     width: 280px;
+    border: 1px solid #ccc;
     height: 100%;
     background: #444444 url('../../img/left_bg.png') repeat;
     z-index: 2;
@@ -33,7 +34,7 @@ body{
     margin-left:280px !important;
     padding-right: 100px !important;
     word-break: break-all;
-    border-top:6px solid #2980b9
+    border-top:1px solid #60B6E8
 }
 #header{
     text-align:center;
