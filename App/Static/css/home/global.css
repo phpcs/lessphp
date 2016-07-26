@@ -21,7 +21,7 @@ body{
     width: 280px;
     border: 1px solid #ccc;
     height: 100%;
-    background: #444444 url('../../img/left_bg.png') repeat;
+    background-color: #1D1C1C;
     z-index: 2;
 
 }
@@ -50,10 +50,10 @@ body{
     color:#ffffff;
 }
 #header img{
-    margin-top: 10px;
+    margin-top: 40px;
 }
 #nav ul{
-    margin-top: 80px;
+    margin-top: 40px;
     padding: 0 0;
 }
 #nav ul li{
@@ -75,7 +75,7 @@ body{
 #nav ul li>a{
     color: rgba(255,255,255,0.5);
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     letter-spacing: 10px;
     text-decoration: none;
 }
