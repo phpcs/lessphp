@@ -4,7 +4,7 @@
 <?php
 $str= '';
 foreach($list as $k => &$v) {
-    $v['profile'] = iconv_substr($v['content'],0,150,'UTF-8');
+    $v['profile'] = iconv_substr(ltrim($v['content']),0,450,'UTF-8');
     $v['profile'] = strip_tags($v['profile']);
     $str .=<<<EOF
       <div class="profile">
