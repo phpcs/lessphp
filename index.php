@@ -5,7 +5,7 @@
 define('APP_NAME', 'App');
 
 //引入核心文件
-require_once(__DIR__ . '/Framework/Init.php');
+require_once  __DIR__ . '/vendor/autoload.php';
 
 
 
