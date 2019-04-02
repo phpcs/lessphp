@@ -1,0 +1,19 @@
+{
+    "name": "bruce/lessphp",
+    "description": "mvc framework",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "chengshuo",
+            "email": "schengshuo@163.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Framework": "Framework/",
+            "App": "App/"
+        }
+    },
+    "require": {}
+}
